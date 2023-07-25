@@ -6,7 +6,7 @@ import {updateResponse} from "../controllers/updateReponse.js"
 dotenv.config();
 
 const baseUrlTranscript = "https://api.assemblyai.com/v2";
-const baseUrlAI = "http://127.0.0.1:5000/api/";
+const baseUrlAI = "https://d7b0-132-154-24-240.ngrok-free.app/api/";
 
 const params = {
   headers: {
@@ -23,7 +23,7 @@ API.interceptors.request.use((config) => {
 });
 
 const aiTalk = (dataAI) =>
-  axios.post(baseUrlAI + "/myendpoint", dataAI);
+  axios.post(baseUrlAI + "/aiResponse", dataAI);
 
 export const transcribe = (audioData, phoneNumber) =>
   API.post(baseUrlTranscript + "/transcript", audioData)
