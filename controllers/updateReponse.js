@@ -11,9 +11,10 @@ export const updateResponse = async (humanText, AiText, phoneNumber) => {
       [phoneNumber]
     );
 
-    rows[0].chat = rows[0].chat + ", " + "caller: " + humanText;
-    rows[0].chat = rows[0].chat + ", " + "AI: " + AiText;
-
+    rows[0].chat =
+      rows[0].chat.slice(0, -1) +
+      `{"role": "caller", "content": ${humanText}}, {"role": "ai", "content": ${AiText}}` +
+      "]";
     rows[0].ai = AiText;
 
     const query = "UPDATE chats SET chat = ? WHERE caller = ?";
@@ -27,6 +28,6 @@ export const updateResponse = async (humanText, AiText, phoneNumber) => {
   } catch (error) {
     console.error("Error occurred:", error);
   } finally {
-    connection.end()
+    connection.end();
   }
 };

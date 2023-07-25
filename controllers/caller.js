@@ -43,7 +43,7 @@ export const firstVoice = async (req, res) => {
 
     await connection.query(
       `INSERT INTO chats (caller, chat, ai, status) VALUES (?, ?, ?, ?)`,
-      [phoneNumber, "", "", false]
+      [phoneNumber, "[]", "", false]
     );
 
     const ai = await connection.query(`SELECT * FROM chats WHERE caller = ?`, [
