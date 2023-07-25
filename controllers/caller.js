@@ -56,9 +56,8 @@ export const firstVoice = async (req, res) => {
     res.status(200).send(twiml.toString());
   } catch (error) {
     res.status(400).json(error);
-  }
-  finally {
-    connection.end()
+  } finally {
+    connection.end();
   }
 };
 
@@ -136,8 +135,7 @@ export const gatherHandle = async (req, res) => {
     res.status(200).send(twiml.toString());
   } catch (error) {
     res.status(400).json(error);
-  }
-  finally{
-    connection.end()
+  } finally {
+    connection.end();
   }
 };

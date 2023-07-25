@@ -1,0 +1,7 @@
+services:
+  - name: node-server
+    env: node
+    startCommand: npm start
+    automaticBuilds:
+      - sourceBranches: ["main"] 
+        buildCommand: npm install
