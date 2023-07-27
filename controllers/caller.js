@@ -46,12 +46,6 @@ export const firstVoice = async (req, res) => {
       [phoneNumber, "[]", "", false]
     );
 
-    const ai = await connection.query(`SELECT * FROM chats WHERE caller = ?`, [
-      phoneNumber,
-    ]);
-
-    deleteRowAfterDelay(ai[0][0].id);
-
     res.type("text/xml");
     res.status(200).send(twiml.toString());
   } catch (error) {
@@ -111,13 +105,18 @@ export const gatherHandle = async (req, res) => {
       await connection.query(query, [false, phoneNumber]);
 
       twiml.say(ai[0][0].ai);
-      twiml.record({
-        action: "/caller/recording-complete",
-        method: "POST",
-        maxLength: 60,
-        timeout: 5,
-        playBeep: true,
-      });
+      if (output.includes("Goodbye") || output.includes("Exit")) {
+        twiml.hangup();
+      }
+      else{
+        twiml.record({
+          action: "/caller/recording-complete",
+          method: "POST",
+          maxLength: 60,
+          timeout: 5,
+          playBeep: true,
+        });
+      }
     } else {
       twiml.say("We are processing your voice. Please wait for few seconds.");
       twiml.play(

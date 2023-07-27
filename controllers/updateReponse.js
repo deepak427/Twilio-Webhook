@@ -13,7 +13,7 @@ export const updateResponse = async (humanText, AiText, phoneNumber) => {
 
     rows[0].chat =
       rows[0].chat.slice(0, -1) +
-      `{"role": "caller", "content": "${humanText}"}, {"role": "ai", "content": "${AiText}"},` +
+      `{"role": "Caller", "content": "${humanText}"}, {"role": "Ai", "content": "${AiText}"},` +
       "]";
     rows[0].ai = AiText;
 
