@@ -2,7 +2,6 @@ import * as api from "../api/index.js";
 import pkg from "twilio";
 import { config } from "../config/config.js";
 import mysql from "mysql2";
-import { deleteRowAfterDelay } from "./rowDeletion.js";
 
 const { twiml } = pkg;
 const VoiceResponse = twiml.VoiceResponse;
