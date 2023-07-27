@@ -104,7 +104,7 @@ export const gatherHandle = async (req, res) => {
       await connection.query(query, [false, phoneNumber]);
 
       twiml.say(ai[0][0].ai);
-      if (output.includes("Goodbye") || output.includes("Exit")) {
+      if (ai[0][0].ai.includes("Goodbye") && ai[0][0].ai.includes("Exit")) {
         twiml.hangup();
       }
       else{
