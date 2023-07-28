@@ -1,6 +1,6 @@
 import { config } from "../config/config.js";
 import mysql from "mysql2";
-import * as api from "../api"
+import * as api from "../api/index.js"
 
 export const updateResponseHuman = async (humanText, phoneNumber) => {
   const pool = mysql.createConnection(config);
