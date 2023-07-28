@@ -35,7 +35,7 @@ export const transcribe = (audioData, phoneNumber) =>
 
       const aiResponse = await updateResponseHuman(humanText, phoneNumber)
 
-      updateResponseAi(humanText, aiResponse.data.message, phoneNumber);
+      updateResponseAi(aiResponse.data.message, phoneNumber);
     })
     .catch((error) => {
       console.error("Error:", error.message);
