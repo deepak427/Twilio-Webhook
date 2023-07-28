@@ -15,7 +15,7 @@ export const firstVoice = async (req, res) => {
 
   try {
     twiml.say(
-      "Hye there, i am personal assistant of mr. Deepak. Can you please tell me who you are, and why you want to talk to mr. Deepak"
+      "Hye there, i am personal assistant of mr. Deepak. Can you please tell me who you are, and why you want to talk to mr. Deepak. Please start talking after beep sound, and press any key when you will complete talking."
     );
     twiml.record({
       action: "/caller/recording-complete",
@@ -104,10 +104,14 @@ export const gatherHandle = async (req, res) => {
       await connection.query(query, [false, phoneNumber]);
 
       twiml.say(ai[0][0].ai);
-      if (ai[0][0].ai.includes("Goodbye") && ai[0][0].ai.includes("Exit")) {
+      if (
+        ai[0][0].ai.includes("Goodbye") ||
+        ai[0][0].ai.includes("Exit") ||
+        ai[0][0].ai.includes("Please wait for the admin to contact you") ||
+        ai[0][0].ai.includes("contact you shortly")
+      ) {
         twiml.hangup();
-      }
-      else{
+      } else {
         twiml.record({
           action: "/caller/recording-complete",
           method: "POST",
