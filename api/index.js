@@ -1,7 +1,7 @@
 import axios from "axios";
 import { checkStatus } from "../controllers/statusChecker.js";
 import dotenv from "dotenv";
-import {updateResponse} from "../controllers/updateReponse.js"
+import {updateResponseAi ,updateResponseHuman} from "../controllers/updateReponse.js"
 
 dotenv.config();
 
@@ -22,7 +22,7 @@ API.interceptors.request.use((config) => {
   return config;
 });
 
-const aiTalk = (dataAI) =>
+export const aiTalk = (dataAI) =>
   axios.post(baseUrlAI + "/aiResponse", dataAI);
 
 export const transcribe = (audioData, phoneNumber) =>
@@ -32,9 +32,10 @@ export const transcribe = (audioData, phoneNumber) =>
       const humanText = await checkStatus(
         baseUrlTranscript + "/transcript" + "/" + idRecording
       );
-      const dataAI = { previous: humanText };
-      const aiResponse = await aiTalk(dataAI);
-      updateResponse(humanText, aiResponse.data.message, phoneNumber);
+
+      const aiResponse = await updateResponseHuman(humanText, phoneNumber)
+
+      updateResponseAi(humanText, aiResponse.data.message, phoneNumber);
     })
     .catch((error) => {
       console.error("Error:", error.message);
