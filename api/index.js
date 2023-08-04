@@ -6,7 +6,7 @@ import {updateResponseAi ,updateResponseHuman} from "../controllers/updateRepons
 dotenv.config();
 
 const baseUrlTranscript = "https://api.assemblyai.com/v2";
-const baseUrlAI = "https://f4d6-106-76-236-84.ngrok-free.app/api/";
+const baseUrlAI = "https://auto-call-ai.onrender.com/api/";
 
 const params = {
   headers: {
