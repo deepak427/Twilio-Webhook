@@ -94,7 +94,23 @@ export const gatherHandle = async (req, res) => {
   const pool = mysql.createConnection(config);
   const connection = pool.promise();
 
-  twiml.say("Mukesh be calm");
+  twiml.say("Mukesh keep calm");
+  if (
+    ai[0][0].ai.includes("Goodbye") ||
+    ai[0][0].ai.includes("Exit") ||
+    ai[0][0].ai.includes("Please wait for the admin to contact you") ||
+    ai[0][0].ai.includes("contact you shortly")
+  ) {
+    twiml.hangup();
+  } else {
+    twiml.record({
+      action: "/caller/recording-complete",
+      method: "POST",
+      maxLength: 60,
+      timeout: 5,
+      playBeep: true,
+    });
+  }
   res.status(200).send(twiml.toString());
 
   try {
