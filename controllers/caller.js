@@ -94,6 +94,10 @@ export const gatherHandle = async (req, res) => {
   const pool = mysql.createConnection(config);
   const connection = pool.promise();
 
+  const ai = await connection.query(`SELECT * FROM chats WHERE caller = ?`, [
+    phoneNumber,
+  ]);
+
   twiml.say("Mukesh keep calm");
   if (
     ai[0][0].ai.includes("Goodbye") ||
