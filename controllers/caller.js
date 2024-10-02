@@ -96,7 +96,7 @@ export const gatherHandle = async (req, res) => {
 
   try {
     const ai = await connection.query(`SELECT * FROM chats WHERE caller = ?`, [
-      +,
+      phoneNumber,
     ]);
 
     if (ai[0][0].status) {
